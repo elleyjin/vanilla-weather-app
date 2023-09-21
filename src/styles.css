@@ -1,0 +1,60 @@
+body {
+  width: 90%;
+  margin: 0 auto;
+  font-family: "Questrial", sans-serif;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  margin: 15px auto;
+}
+
+.current-location {
+  display: inline;
+}
+
+.search-bar {
+  display: inline;
+  width: 200px;
+}
+
+.search-btn {
+  display: inline;
+}
+
+.current-logo {
+  font-size: 60pt;
+}
+
+.main-weather-container {
+  margin: 50px auto;
+  width: 90%;
+  text-align: center;
+}
+
+.main-weather-img {
+  display: block;
+  width: 12%;
+  margin: 15px auto;
+}
+
+.current-temp {
+  font-size: 54pt;
+  margin: 10px auto;
+}
+
+.weather-description {
+  font-family: "Quicksand", sans-serif;
+  font-size: 17pt;
+}
+
+.today-temp {
+  font-family: "Quicksand", sans-serif;
+  font-size: 15pt;
+}
+
+.local-time {
+  font-size: 13pt;
+  font-family: "Quicksand", sans-serif;
+}
