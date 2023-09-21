@@ -1,8 +1,14 @@
 body {
-  width: 90%;
+  width: 85%;
   margin: 0 auto;
-  font-family: "Questrial", sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: 500;
+  color: white;
+  background: linear-gradient(
+    179.5deg,
+    rgb(250, 230, 98) 3.3%,
+    rgb(252, 168, 95) 96%
+  );
 }
 
 footer {
@@ -10,13 +16,27 @@ footer {
   margin: 15px auto;
 }
 
+.navibar {
+  margin: 20px auto;
+}
+
+.fa-location-dot {
+  font-size: 17pt;
+  color: whtie;
+  margin: 5px;
+}
+
 .current-location {
   display: inline;
+  /* font-family: "Quicksand", sans-serif; */
+  font-size: 16pt;
+  font-weight: 700;
 }
 
 .search-bar {
   display: inline;
   width: 200px;
+  font-size: 13pt;
 }
 
 .search-btn {
@@ -35,26 +55,52 @@ footer {
 
 .main-weather-img {
   display: block;
-  width: 12%;
+  width: 150px;
   margin: 15px auto;
 }
 
 .current-temp {
-  font-size: 54pt;
+  font-size: 55pt;
+  font-weight: 600;
   margin: 10px auto;
 }
 
 .weather-description {
-  font-family: "Quicksand", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
   font-size: 17pt;
 }
 
 .today-temp {
-  font-family: "Quicksand", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
   font-size: 15pt;
 }
 
 .local-time {
   font-size: 13pt;
-  font-family: "Quicksand", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
+}
+
+.card-container {
+  /* margin: 0 auto; */
+}
+
+.card-title {
+  font-size: 17pt;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.card-body {
+  /* border-style: none; */
+}
+
+.weather-icon {
+  width: 50px;
+  display: block;
+  margin: 40px auto;
+}
+
+.weekday {
+  font-size: 13pt;
+  font-weight: 500;
 }
