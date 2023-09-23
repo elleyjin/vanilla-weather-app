@@ -12,29 +12,31 @@
     />
     <link rel="stylesheet" href="src/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;800&family=Inclusive+Sans&family=Montserrat:wght@400;500&family=Quicksand:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">    
-<script      
-src="https://kit.fontawesome.com/bec178e7b7.js"
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;800&family=Inclusive+Sans&family=Montserrat:wght@400;500&family=Quicksand:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">    
+    <script      
+      src="https://kit.fontawesome.com/bec178e7b7.js"
       crossorigin="anonymous"
     ></script>
   </head>
   <body>
     <div class="container">
-      <div class="navibar">
-        <i class="fa-solid fa-location-dot"></i>
-        <div class="current-location">current location</div>
-        <div class="input-group search-bar mb-3">
-          <div class="container-fluid">
-          <input type="text" class="form-control search-bar" placeholder="Enter a city" aria-label="Recipient's username" aria-describedby="button-addon2" style="width: 250px;">
-          <button class="btn search-btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <nav class="navbar">
+      <div class="container-fluid navibar">
+        <div class="navbar-brand current-location">
+          <i class="fa-solid fa-location-dot"></i>current location
         </div>
-        </div>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search a city" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
       </div>
+      </nav>
       <div>
         <div class="main-weather-container">       
           <img src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/097/811/original/sun.png?1695302792" alt="freepik-sun" class="main-weather-img">
-          <!-- <i class="fa-solid fa-sun current-logo"></i> -->
           <h1 class="current-temp">28°</h1>
           <p class="weather-description">clear sky</p>
           <p class="today-temp"><strong> l: 27° h: 32° </strong></p>
@@ -44,11 +46,10 @@ src="https://kit.fontawesome.com/bec178e7b7.js"
         <div class="row row-cols-1 row-cols-md-6 g-4 card-container">
             <div class="col">
                 <div class="card text-center h-100">
-                    <div class="card-body border-light">
+                    <div class="card-body">
                         <h5 class="card-title">mon</h5>
                         <p class="card-text weather-icon">
                           <img src="images/rainy (1).png" alt="freepik-rainy" class="weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                         </p>
                         <p class="card-text weekday">24° | 34°</p>
                     </div>
@@ -59,7 +60,6 @@ src="https://kit.fontawesome.com/bec178e7b7.js"
                     <div class="card-body">
                         <h5 class="card-title">tue</h5>
                         <p class="card-text weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                           <img src="images/sun.png" alt="freepik-sun" class="weather-icon">
                         </p>
                         <p class="card-text weekday">24° | 34°</p>
@@ -71,7 +71,6 @@ src="https://kit.fontawesome.com/bec178e7b7.js"
                     <div class="card-body">
                         <h5 class="card-title">wed</h5>
                           <p class="card-text weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                           <img src="images/thunder.png" alt="freepik-sun" class="weather-icon">
                         </p>
                         <p class="card-text weekday">24° | 34°</p>
@@ -83,7 +82,6 @@ src="https://kit.fontawesome.com/bec178e7b7.js"
                     <div class="card-body">
                         <h5 class="card-title">thur</h5>
                           <p class="card-text weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                           <img src="images/clouds.png" alt="freepik-sun" class="weather-icon">
                         </p>
                         <p class="card-text weekday">24° | 34°</p>
@@ -95,19 +93,17 @@ src="https://kit.fontawesome.com/bec178e7b7.js"
                     <div class="card-body">
                         <h5 class="card-title">fri</h5>
                         <p class="card-text weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                           <img src="images/clouds.png" alt="freepik-sun" class="weather-icon">
                         </p>
                         <p class="card-text weekday">24° | 34°</p>
                     </div>
                 </div>
             </div>
-                        <div class="col">
+                <div class="col">
                 <div class="card text-center h-100">
                     <div class="card-body">
                         <h5 class="card-title">sat</h5>
                         <p class="card-text weather-icon">
-                          <!-- <i class="fa-solid fa-cloud-rain"></i> -->
                           <img src="images/rainy (1).png" alt="freepik-sun" class="weather-icon">
                         </p>
                         <p class="card-text weekday">24° | 34°</p>

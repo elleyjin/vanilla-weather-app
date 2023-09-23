@@ -13,42 +13,31 @@ body {
 
 footer {
   text-align: center;
-  margin: 15px auto;
-}
-
-.navibar {
   margin: 20px auto;
 }
 
+.navibar {
+  margin: 30px auto 0 auto;
+}
+
 .fa-location-dot {
-  font-size: 17pt;
-  color: whtie;
-  margin: 5px;
+  font-size: 18pt;
+  color: white;
+  margin: 15px;
 }
 
 .current-location {
-  display: inline;
-  /* font-family: "Quicksand", sans-serif; */
   font-size: 16pt;
   font-weight: 700;
+  color: white;
 }
 
-.search-bar {
-  display: inline;
-  width: 200px;
-  font-size: 13pt;
-}
-
-.search-btn {
-  display: inline;
-}
-
-.current-logo {
-  font-size: 60pt;
+.current-location:hover {
+  color: white;
 }
 
 .main-weather-container {
-  margin: 50px auto;
+  margin: 80px auto;
   width: 90%;
   text-align: center;
 }
@@ -62,26 +51,19 @@ footer {
 .current-temp {
   font-size: 55pt;
   font-weight: 600;
-  margin: 10px auto;
+  margin: 40px auto 20px auto;
 }
 
 .weather-description {
-  /* font-family: "Quicksand", sans-serif; */
   font-size: 17pt;
 }
 
 .today-temp {
-  /* font-family: "Quicksand", sans-serif; */
   font-size: 15pt;
 }
 
 .local-time {
   font-size: 13pt;
-  /* font-family: "Quicksand", sans-serif; */
-}
-
-.card-container {
-  /* margin: 0 auto; */
 }
 
 .card-title {
@@ -90,8 +72,10 @@ footer {
   margin-top: 10px;
 }
 
-.card-body {
-  /* border-style: none; */
+.card {
+  background: inherit;
+  border: none;
+  color: white;
 }
 
 .weather-icon {
@@ -101,6 +85,6 @@ footer {
 }
 
 .weekday {
-  font-size: 13pt;
+  font-size: 14pt;
   font-weight: 500;
 }
