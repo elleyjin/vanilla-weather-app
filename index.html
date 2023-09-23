@@ -23,13 +23,14 @@
     <div class="container">
       <nav class="navbar">
       <div class="container-fluid navibar">
-        <div class="navbar-brand current-location">
-          <i class="fa-solid fa-location-dot"></i>current location
+        <div class="navbar-brand current-location" id="current-loc">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="location-text">current location</span>
         </div>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search a city" aria-label="Search">
+          <input id="search-input" class="form-control me-2" type="search" placeholder="Search a city" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
           </button>
         </form>
       </div>
