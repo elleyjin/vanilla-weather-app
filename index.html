@@ -14,10 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;800&family=Inclusive+Sans&family=Montserrat:wght@400;500&family=Quicksand:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script      
       src="https://kit.fontawesome.com/bec178e7b7.js"
       crossorigin="anonymous"
     ></script>
+    
   </head>
   <body>
     <div class="container">
@@ -25,7 +27,7 @@
       <div class="container-fluid navibar">
         <div class="navbar-brand current-location" id="current-loc">
           <i class="fa-solid fa-location-dot"></i>
-          <span id="location-text">current location</span>
+          <span id="location-text">new york</span>
         </div>
         <form class="d-flex" role="search">
           <input id="search-input" class="form-control me-2" type="search" placeholder="Search a city" aria-label="Search">
@@ -38,10 +40,10 @@
       <div>
         <div class="main-weather-container">       
           <img src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/097/811/original/sun.png?1695302792" alt="freepik-sun" class="main-weather-img">
-          <h1 class="current-temp">28°</h1>
-          <p class="weather-description">clear sky</p>
-          <p class="today-temp"><strong> l: 27° h: 32° </strong></p>
-          <p class="local-time">20th Sept 23 | 18:34 pm</p>
+          <div><h1 class="current-temp"><span id="temperature">28</span><span class="units">°C <span class="seperator">|</span> <span class="inactive">°F</span></span></h1></div>
+          <p class="weather-description" id="description">clear sky</p>
+          <p class="today-temp"><strong> l: <span id="low-temp">27°</span> h: <span id="high-temp">32°</span></strong></p>
+          <p class="local-time" id="date">20th Sept 23 | 18:34 pm</p>
         </div>
       </div>
         <div class="row row-cols-1 row-cols-md-6 g-4 card-container">

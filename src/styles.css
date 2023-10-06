@@ -54,6 +54,23 @@ footer {
   margin: 40px auto 20px auto;
 }
 
+.units {
+  font-size: 15pt;
+  position: relative;
+  top: -34px;
+  margin-left: 5px;
+  font-weight: 700;
+}
+
+.seperator {
+  font-weight: 400;
+}
+
+.inactive {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
 .weather-description {
   font-size: 17pt;
 }
