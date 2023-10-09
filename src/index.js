@@ -1,21 +1,6 @@
-let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=metric&appid=${apiKey}`;
-
-function showCity(event) {
-  event.preventDefault();
-
-  let searchInput = document.querySelector("#search-input");
-  let currentLocation = document.querySelector("#city");
-  currentLocation.innerHTML = searchInput.value;
-}
-
-let searchButton = document.querySelector("#search-btn");
-searchButton.addEventListener("click", showCity);
-
 function showWeather(response) {
   console.log(response.data);
 
-  // shows default city (NY)
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name.toLowerCase();
 
@@ -94,7 +79,7 @@ function showDateTime() {
   if (nextDay >= days.length) {
     nextDay = 0;
   }
-  console.log(nextDay);
+  // console.log(nextDay);
 
   let today = document.querySelector("#today");
   today.innerHTML = days[currentDay].toLowerCase();
@@ -116,4 +101,21 @@ function showDateTime() {
   sixthDay.innerHTML = dayName;
 }
 
-axios.get(apiUrl).then(showWeather).then(showDateTime);
+function searchApi(city) {
+  let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(showWeather).then(showDateTime);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-input");
+  searchApi(searchInput.value);
+}
+
+let searchButton = document.querySelector("#search-btn");
+searchButton.addEventListener("submit", handleSubmit);
+
+searchApi("new york");
+
+// need to convert to lon/lat
