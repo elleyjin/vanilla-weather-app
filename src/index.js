@@ -43,6 +43,7 @@ function showDateTime() {
   let minutes = currentDate.getMinutes();
   let suffix = document.querySelector("#suffix");
 
+  // Display proper time format and date suffix
   if (minutes < 10) {
     minutes = `0` + minutes;
   }
@@ -69,15 +70,18 @@ function showDateTime() {
     suffix = "am";
   }
 
+  // Display current information
   let date = document.querySelector("#date");
   date.innerHTML = `${day} ${month} ${year} | ${hour}:${minutes} ${suffix}`;
 
+  // Display weather for next 6 days
   let currentDay = currentDate.getDay();
   let nextDay = currentDay + 1;
   let dayName = days[nextDay].toLowerCase();
   let weekDays = document.querySelector(".days");
   weekDays.innerHTML = days[currentDay].toLowerCase();
 
+  // loop for displaying the days
   for (dayCounter = 0; dayCounter <= weekDays.length; dayCounter++) {
     // let weekDays = currentDay + dayCounter;
     if (nextDay >= days.length) {
@@ -86,15 +90,16 @@ function showDateTime() {
     // console.log(dayCounter);
   }
 
+  // Display days output
   let today = document.querySelector("#today");
   today.innerHTML = days[currentDay].toLowerCase();
 
   let tomorrow = document.querySelector("#tomorrow");
   tomorrow.innerHTML = dayName;
   // console.log(nextDay);
-  console.log(days[currentDay]);
+  // console.log(days[currentDay]);
 
-  console.log(days[dayCounter]);
+  // console.log(days[dayCounter]);
 }
 
 function searchApi(city) {
@@ -112,6 +117,7 @@ function handleSubmit(event) {
 let searchButton = document.querySelector("#search-btn");
 searchButton.addEventListener("submit", handleSubmit);
 
+// Display default city weather information
 searchApi("new york");
 
 // need to convert to lon/lat
