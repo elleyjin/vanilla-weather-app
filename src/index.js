@@ -1,3 +1,20 @@
+let months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
 function showWeather(response) {
   console.log(response.data);
 
@@ -16,23 +33,6 @@ function showWeather(response) {
   let maxTemp = document.querySelector("#high-temp");
   maxTemp.innerHTML = Math.floor(response.data.main.temp_max) + `°`;
 }
-
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
 function showDateTime() {
   let currentDate = new Date();
@@ -75,30 +75,26 @@ function showDateTime() {
   let currentDay = currentDate.getDay();
   let nextDay = currentDay + 1;
   let dayName = days[nextDay].toLowerCase();
+  let weekDays = document.querySelector(".days");
+  weekDays.innerHTML = days[currentDay].toLowerCase();
 
-  if (nextDay >= days.length) {
-    nextDay = 0;
+  for (dayCounter = 0; dayCounter <= weekDays.length; dayCounter++) {
+    // let weekDays = currentDay + dayCounter;
+    if (nextDay >= days.length) {
+      nextDay = 0;
+    }
+    // console.log(dayCounter);
   }
-  // console.log(nextDay);
 
   let today = document.querySelector("#today");
   today.innerHTML = days[currentDay].toLowerCase();
 
   let tomorrow = document.querySelector("#tomorrow");
   tomorrow.innerHTML = dayName;
-  console.log(nextDay);
+  // console.log(nextDay);
+  console.log(days[currentDay]);
 
-  let thirdDay = document.querySelector("#third-day");
-  thirdDay.innerHTML = dayName;
-
-  let fourthDay = document.querySelector("#fourth-day");
-  fourthDay.innerHTML = dayName;
-
-  let fifthDay = document.querySelector("#fifth-day");
-  fifthDay.innerHTML = dayName;
-
-  let sixthDay = document.querySelector("#sixth-day");
-  sixthDay.innerHTML = dayName;
+  console.log(days[dayCounter]);
 }
 
 function searchApi(city) {
