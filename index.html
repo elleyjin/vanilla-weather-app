@@ -40,10 +40,11 @@
       <div>
         <div class="main-weather-container">       
           <img src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/097/811/original/sun.png?1695302792" alt="freepik-sun" class="main-weather-img">
+          <!-- see if can use ul & li here -->
           <div><h1 class="current-temp"><span id="temperature"></span><span class="units">°C <span class="seperator">|</span> <span class="inactive">°F</span></span></h1></div>
           <p class="weather-description" id="description"></p>
           <p class="today-temp"><strong> l: <span id="low-temp"></span> h: <span id="high-temp"></span></strong></p>
-          <p class="local-time" id="date">20th Sept 23 | 18:34 <span id="suffix"></span>pm</p>
+          <p><span id="date"></span><span id="time"></span><span id="suffix"></span></p>
         </div>
       </div>
         <div class="row row-cols-1 row-cols-md-6 g-4 card-container">
@@ -61,7 +62,7 @@
             <div class="col">
                 <div class="card text-center h-100">
                     <div class="card-body">
-                        <h5 class="card-title days" id="tomorrow"></h5>
+                        <h5 class="card-title" id="tomorrow"></h5>
                         <p class="card-text weather-icon">
                           <img src="images/sun.png" alt="freepik-sun" class="weather-icon">
                         </p>

@@ -1,3 +1,5 @@
+let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
+
 let months = [
   "Jan",
   "Feb",
@@ -32,18 +34,19 @@ function showWeather(response) {
 
   let maxTemp = document.querySelector("#high-temp");
   maxTemp.innerHTML = Math.floor(response.data.main.temp_max) + `°`;
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
 }
 
-function showDateTime() {
-  let currentDate = new Date();
+function formatDateTime(timestamp) {
+  let currentDate = new Date(timestamp);
   let day = currentDate.getDate();
   let month = months[currentDate.getMonth()];
   let year = currentDate.getFullYear();
   let hour = currentDate.getHours();
   let minutes = currentDate.getMinutes();
   let suffix = document.querySelector("#suffix");
-
-  // Display proper time format and date suffix
   if (minutes < 10) {
     minutes = `0` + minutes;
   }
@@ -70,42 +73,59 @@ function showDateTime() {
     suffix = "am";
   }
 
+  // let newDate = new Date(timestamp);
+  // let newDay = newDate.getDate();
+
+  // Display proper time format and date suffix
+
   // Display current information
-  let date = document.querySelector("#date");
-  date.innerHTML = `${day} ${month} ${year} | ${hour}:${minutes} ${suffix}`;
+  // let dateElement = document.querySelector("#date");
+  // dateElement.innerHTML = `${day} ${month} ${year} | ${hour}:${minutes} ${suffix}`;
 
   // Display weather for next 6 days
-  let currentDay = currentDate.getDay();
-  let nextDay = currentDay + 1;
-  let dayName = days[nextDay].toLowerCase();
-  let weekDays = document.querySelector(".days");
-  weekDays.innerHTML = days[currentDay].toLowerCase();
-
-  // loop for displaying the days
-  for (dayCounter = 0; dayCounter <= weekDays.length; dayCounter++) {
-    // let weekDays = currentDay + dayCounter;
-    if (nextDay >= days.length) {
-      nextDay = 0;
-    }
-    // console.log(dayCounter);
-  }
-
-  // Display days output
-  let today = document.querySelector("#today");
-  today.innerHTML = days[currentDay].toLowerCase();
-
-  let tomorrow = document.querySelector("#tomorrow");
-  tomorrow.innerHTML = dayName;
-  // console.log(nextDay);
-  // console.log(days[currentDay]);
-
-  // console.log(days[dayCounter]);
+  // let currentDay = currentDate.getDay();
+  // let nextDay;
+  // if (currentDay === -1) {
+  //   nextDay = 0;
+  // } else {
+  //   nextDay = currentDay + 1;
+  // }
+  // let dayName = days[nextDay].toLowerCase();
+  // let weekDays = document.querySelectorAll(".days");
+  // weekDays.forEach((dayElement) => {
+  //   dayElement.innerHTML = "";
+  //   for (let dayCounter = 0; dayCounter < days.length; dayCounter++) {
+  //     let index = currentDay + dayCounter;
+  //     if (index >= days.length) {
+  //       index = index - days.length;
+  //     }
+  //     dayElement.innerHTML += days[index].toLowerCase();
+  //   }
+  return `${day} ${month} ${year} | last updated: ${hour}:${minutes} ${suffix}`;
 }
 
+function weeklyWeather() {
+  let weeklyApiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt=6&appid=${apiKey}`;
+
+  // select the info to show for weekly
+
+  axios.get(weeklyApiUrl).then(showWeather);
+}
+
+// Display days output
+// let today = document.querySelector("#today");
+// today.innerHTML = days[currentDay].toLowerCase();
+
+// let tomorrow = document.querySelector("#tomorrow");
+// tomorrow.innerHTML = dayName;
+// console.log(nextDay);
+// console.log(days[currentDay]);
+
+// console.log(days[dayCounter]);
+
 function searchApi(city) {
-  let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=metric&appid=${apiKey}`;
-  axios.get(apiUrl).then(showWeather).then(showDateTime);
+  axios.get(apiUrl).then(showWeather).then(formatDateTime);
 }
 
 function handleSubmit(event) {
