@@ -37,6 +37,17 @@ function showWeather(response) {
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#icon");
+  let icon = response.data.weather[0].icon;
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  console.log(response.data.dt);
 }
 
 function formatDateTime(timestamp) {
@@ -101,6 +112,8 @@ function formatDateTime(timestamp) {
   //     }
   //     dayElement.innerHTML += days[index].toLowerCase();
   //   }
+  console.log(`${hour}:${minutes}`);
+
   return `${day} ${month} ${year} | last updated: ${hour}:${minutes} ${suffix}`;
 }
 
@@ -124,7 +137,7 @@ function weeklyWeather() {
 // console.log(days[dayCounter]);
 
 function searchApi(city) {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=new york&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(showWeather).then(formatDateTime);
 }
 
