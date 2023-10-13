@@ -18,8 +18,6 @@ let months = [
 let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
 function showWeather(response) {
-  console.log(response.data);
-
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name.toLowerCase();
 
@@ -47,7 +45,38 @@ function showWeather(response) {
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  console.log(response.data.dt);
+  iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
+}
+
+function switchIcon(description) {
+  switch (description) {
+    case "Clear":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/097/811/original/sun.png?1695302792";
+      break;
+    case "Clouds":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/114/original/few_cloud.png?1697107645";
+      break;
+    case "Thunderstorm":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/112/original/thunder.png?1697107627";
+      break;
+    case "Rain":
+    case "Drizzle":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/111/original/rainy_%281%29.png?1697107612";
+      break;
+    case "Snow":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/116/original/snow.png?1697108437";
+      break;
+    case "Mist":
+    case "Dust":
+    case "Haze":
+    case "Fog":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/234/original/misty.png?1697163791";
+      break;
+    // case default:
+    //   function defaultIcons(response) {
+    //       iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
+    //   }
+  }
 }
 
 function formatDateTime(timestamp) {
@@ -84,70 +113,23 @@ function formatDateTime(timestamp) {
     suffix = "am";
   }
 
-  // let newDate = new Date(timestamp);
-  // let newDay = newDate.getDate();
-
-  // Display proper time format and date suffix
-
-  // Display current information
-  // let dateElement = document.querySelector("#date");
-  // dateElement.innerHTML = `${day} ${month} ${year} | ${hour}:${minutes} ${suffix}`;
-
-  // Display weather for next 6 days
-  // let currentDay = currentDate.getDay();
-  // let nextDay;
-  // if (currentDay === -1) {
-  //   nextDay = 0;
-  // } else {
-  //   nextDay = currentDay + 1;
-  // }
-  // let dayName = days[nextDay].toLowerCase();
-  // let weekDays = document.querySelectorAll(".days");
-  // weekDays.forEach((dayElement) => {
-  //   dayElement.innerHTML = "";
-  //   for (let dayCounter = 0; dayCounter < days.length; dayCounter++) {
-  //     let index = currentDay + dayCounter;
-  //     if (index >= days.length) {
-  //       index = index - days.length;
-  //     }
-  //     dayElement.innerHTML += days[index].toLowerCase();
-  //   }
-  console.log(`${hour}:${minutes}`);
-
   return `${day} ${month} ${year} | last updated: ${hour}:${minutes} ${suffix}`;
 }
 
-function weeklyWeather() {
-  let weeklyApiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt=6&appid=${apiKey}`;
-
-  // select the info to show for weekly
-
-  axios.get(weeklyApiUrl).then(showWeather);
-}
-
-// Display days output
-// let today = document.querySelector("#today");
-// today.innerHTML = days[currentDay].toLowerCase();
-
-// let tomorrow = document.querySelector("#tomorrow");
-// tomorrow.innerHTML = dayName;
-// console.log(nextDay);
-// console.log(days[currentDay]);
-
-// console.log(days[dayCounter]);
-
+// calling ajax
 function searchApi(city) {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=new york&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
   axios.get(apiUrl).then(showWeather).then(formatDateTime);
 }
 
 function handleSubmit(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  searchApi(searchInput.value);
+  let searchInputElement = document.querySelector("#search-input");
+  searchApi(searchInputElement.value);
 }
 
-let searchButton = document.querySelector("#search-btn");
+let searchButton = document.querySelector("#search-form");
 searchButton.addEventListener("submit", handleSubmit);
 
 // Display default city weather information
