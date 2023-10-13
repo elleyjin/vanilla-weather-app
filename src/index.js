@@ -54,10 +54,6 @@ function switchIcon(description) {
     case "Fog":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/234/original/misty.png?1697163791";
       break;
-    // case default:
-    //   function defaultIcons(response) {
-    //       iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
-    //   }
   }
 }
 
@@ -98,8 +94,8 @@ function formatDateTime(timestamp) {
   return `${day} ${month} ${year} | last updated: ${hour}:${minutes} ${suffix}`;
 }
 
-// calling ajax
 function searchApi(city) {
+  let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showWeather).then(formatDateTime);
 }
@@ -115,17 +111,22 @@ function showFarenheitTemp(event) {
   let calcFarenheit = document.querySelector("#farenheit-link");
   let temperatureElement = document.querySelector("#temperature");
 
+  farenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+
   calcFarenheit = Math.floor((celsiusTemp * 9) / 5 + 32);
   temperatureElement.innerHTML = calcFarenheit;
 }
 
 function showCelsiusTemp(event) {
   event.preventDefault();
-  let celsiusLink = document.querySelector("#temperature");
-  celsiusLink.innerHTML = Math.floor(celsiusTemp);
-}
+  let showCelsiusTemp = document.querySelector("#temperature");
 
-let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
+  celsiusLink.classList.add("active");
+  farenheitLink.classList.remove("active");
+
+  showCelsiusTemp.innerHTML = Math.floor(celsiusTemp);
+}
 
 let months = [
   "Jan",
