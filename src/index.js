@@ -1,22 +1,3 @@
-let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
-
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-
 function showWeather(response) {
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name.toLowerCase();
@@ -36,6 +17,8 @@ function showWeather(response) {
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
 
+  celsiusTemp = response.data.main.temp;
+
   let iconElement = document.querySelector("#icon");
   let icon = response.data.weather[0].icon;
   iconElement.setAttribute(
@@ -44,7 +27,6 @@ function showWeather(response) {
   );
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
-
   iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
 }
 
@@ -119,7 +101,6 @@ function formatDateTime(timestamp) {
 // calling ajax
 function searchApi(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(showWeather).then(formatDateTime);
 }
 
@@ -129,10 +110,52 @@ function handleSubmit(event) {
   searchApi(searchInputElement.value);
 }
 
+function showFarenheitTemp(event) {
+  event.preventDefault();
+  let calcFarenheit = document.querySelector("#farenheit-link");
+  let temperatureElement = document.querySelector("#temperature");
+
+  calcFarenheit = Math.floor((celsiusTemp * 9) / 5 + 32);
+  temperatureElement.innerHTML = calcFarenheit;
+}
+
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  let celsiusLink = document.querySelector("#temperature");
+  celsiusLink.innerHTML = Math.floor(celsiusTemp);
+}
+
+let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
+
+let months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+let celsiusTemp = null;
+
 let searchButton = document.querySelector("#search-form");
 searchButton.addEventListener("submit", handleSubmit);
 
-// Display default city weather information
+let farenheitLink = document.querySelector("#farenheit-link");
+farenheitLink.addEventListener("click", showFarenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsiusTemp);
+
 searchApi("new york");
+// Display default city weather information
 
 // need to convert to lon/lat

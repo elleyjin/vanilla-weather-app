@@ -11,6 +11,12 @@ body {
   );
 }
 
+a {
+  color: white;
+  text-decoration: none;
+  cursor: default;
+}
+
 footer {
   text-align: center;
   margin: 20px auto;
