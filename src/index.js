@@ -1,23 +1,23 @@
 function showWeather(response) {
-  let city = document.querySelector("#city");
-  city.innerHTML = response.data.name.toLowerCase();
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = response.data.name.toLowerCase();
 
-  let currentTemp = document.querySelector("#temperature");
-  currentTemp.innerHTML = Math.floor(response.data.main.temp);
+  let tempElement = document.querySelector("#temperature");
+  tempElement.innerHTML = Math.floor(response.data.main.temp);
 
-  let description = document.querySelector("#description");
-  description.innerHTML = response.data.weather[0].description;
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.weather[0].description;
 
-  let minTemp = document.querySelector("#low-temp");
-  minTemp.innerHTML = Math.floor(response.data.main.temp_min) + `°`;
+  let minTempElement = document.querySelector("#low-temp");
+  minTempElement.innerHTML = Math.floor(response.data.main.temp_min) + `°`;
 
-  let maxTemp = document.querySelector("#high-temp");
-  maxTemp.innerHTML = Math.floor(response.data.main.temp_max) + `°`;
+  let maxTempElement = document.querySelector("#high-temp");
+  maxTempElement.innerHTML = Math.floor(response.data.main.temp_max) + `°`;
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
 
-  celsiusTemp = response.data.main.temp;
+  celsiusTemperature = response.data.main.temp;
 
   let iconElement = document.querySelector("#icon");
   let icon = response.data.weather[0].icon;
@@ -28,6 +28,8 @@ function showWeather(response) {
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
   iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
+
+  showForecast();
 }
 
 function switchIcon(description) {
@@ -114,7 +116,7 @@ function showFarenheitTemp(event) {
   farenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
 
-  calcFarenheit = Math.floor((celsiusTemp * 9) / 5 + 32);
+  calcFarenheit = Math.floor((celsiusTemperature * 9) / 5 + 32);
   temperatureElement.innerHTML = calcFarenheit;
 }
 
@@ -125,7 +127,35 @@ function showCelsiusTemp(event) {
   celsiusLink.classList.add("active");
   farenheitLink.classList.remove("active");
 
-  showCelsiusTemp.innerHTML = Math.floor(celsiusTemp);
+  showCelsiusTemp.innerHTML = Math.floor(celsiusTemperature);
+}
+
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  // variable to store forecast HTML
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
+
+  // loop through and display each day & HTML block in forecast
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+      <div class="card text-center h-100">
+      <div class="card-body">
+      <h5 class="card-title" id="today">${day.toLowerCase()}</h5>
+      <p class="card-text weather-icon">
+      <img src="images/shower.png" alt="freepik-rainy" class="weather-icon">
+      </p>
+      <p class="card-text weekday">24° | 34°</p>
+      </div>
+          </div> 
+          </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 let months = [
@@ -145,7 +175,7 @@ let months = [
 
 let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
-let celsiusTemp = null;
+let celsiusTemperature = null;
 
 let searchButton = document.querySelector("#search-form");
 searchButton.addEventListener("submit", handleSubmit);
@@ -156,7 +186,5 @@ farenheitLink.addEventListener("click", showFarenheitTemp);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
-searchApi("new york");
 // Display default city weather information
-
-// need to convert to lon/lat
+searchApi("new york");

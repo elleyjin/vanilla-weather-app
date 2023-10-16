@@ -4,11 +4,7 @@ body {
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   color: white;
-  background: linear-gradient(
-    179.5deg,
-    rgb(250, 230, 98) 3.3%,
-    rgb(252, 168, 95) 96%
-  );
+  background: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 }
 
 a {
