@@ -116,7 +116,7 @@ function formatDay(timestamp) {
 }
 
 function changeIcon(icon) {
-  let iconElement = document.querySelector("#weather-icon");
+  let iconElement = document.querySelector("#forecast-icon");
   if (iconElement) {
     iconElement.setAttribute("src", switchIcon(icon));
   }
