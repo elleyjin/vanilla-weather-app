@@ -1,4 +1,5 @@
 function showWeather(response) {
+  // console.log(response.data);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name.toLowerCase();
 
@@ -29,7 +30,58 @@ function showWeather(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
   iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
 
-  showForecast();
+  // calling the function with coordinate parameter
+  getForecastApi(response.data.coord);
+}
+
+function getForecastApi(coordinates) {
+  console.log(coordinates);
+  let apiKey = "46fac47dd8b8fa26d1b6852218ad3dfe";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+}
+
+function showForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let iconElement = document;
+  // variable to store forecast HTML
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
+
+  // display daily array
+  let forecast = response.data.daily;
+  // loop through and display each day & HTML block in forecast
+  forecast.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+      <div class="card text-center h-100">
+      <div class="card-body">
+      <h5 class="card-title" id="day">${formatForecast(day.dt)}</h5>
+      <p class="card-text weather-icon">
+      <img src="images/shower.png" alt="freepik-rainy" class="weather-icon">
+      </p>
+      <p class="card-text">
+      ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
+        day.temp.max
+      )}°</strong></p>
+      </div>
+          </div> 
+          </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+
+  console.log(forecast);
+}
+
+function formatForecast(timestamp) {
+  let forecastDay = new Date(timestamp * 1000);
+  console.log(forecastDay);
+  let days = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+
+  return days[forecastDay.getDay()];
 }
 
 function switchIcon(description) {
@@ -130,34 +182,6 @@ function showCelsiusTemp(event) {
   showCelsiusTemp.innerHTML = Math.floor(celsiusTemperature);
 }
 
-function showForecast() {
-  let forecastElement = document.querySelector("#forecast");
-
-  // variable to store forecast HTML
-  let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
-
-  // loop through and display each day & HTML block in forecast
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
-      <div class="card text-center h-100">
-      <div class="card-body">
-      <h5 class="card-title" id="today">${day.toLowerCase()}</h5>
-      <p class="card-text weather-icon">
-      <img src="images/shower.png" alt="freepik-rainy" class="weather-icon">
-      </p>
-      <p class="card-text weekday">24° | 34°</p>
-      </div>
-          </div> 
-          </div>
-          `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
 let months = [
   "Jan",
   "Feb",
@@ -172,8 +196,6 @@ let months = [
   "Nov",
   "Dec",
 ];
-
-let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
 let celsiusTemperature = null;
 
