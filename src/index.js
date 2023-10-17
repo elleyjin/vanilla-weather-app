@@ -21,67 +21,17 @@ function showWeather(response) {
   celsiusTemperature = response.data.main.temp;
 
   let iconElement = document.querySelector("#icon");
-  let icon = response.data.weather[0].icon;
-  iconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${icon}@2x.png`
-  );
+  // let icon = response.data.weather[0].icon;
+  // iconElement.setAttribute(
+  //   "src",
+  //   `https://openweathermap.org/img/wn/${icon}@2x.png`
+  // );
 
-  iconElement.setAttribute("alt", response.data.weather[0].description);
   iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  // calling the function with coordinate parameter
+  // calling the function with coordinate as parameter
   getForecastApi(response.data.coord);
-}
-
-function getForecastApi(coordinates) {
-  console.log(coordinates);
-  let apiKey = "46fac47dd8b8fa26d1b6852218ad3dfe";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showForecast);
-}
-
-function showForecast(response) {
-  let forecastElement = document.querySelector("#forecast");
-  let iconElement = document;
-  // variable to store forecast HTML
-  let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
-
-  // display daily array
-  let forecast = response.data.daily;
-  // loop through and display each day & HTML block in forecast
-  forecast.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
-      <div class="card text-center h-100">
-      <div class="card-body">
-      <h5 class="card-title" id="day">${formatForecast(day.dt)}</h5>
-      <p class="card-text weather-icon">
-      <img src="images/shower.png" alt="freepik-rainy" class="weather-icon">
-      </p>
-      <p class="card-text">
-      ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
-        day.temp.max
-      )}°</strong></p>
-      </div>
-          </div> 
-          </div>
-          `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-
-  console.log(forecast);
-}
-
-function formatForecast(timestamp) {
-  let forecastDay = new Date(timestamp * 1000);
-  console.log(forecastDay);
-  let days = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
-
-  return days[forecastDay.getDay()];
 }
 
 function switchIcon(description) {
@@ -108,6 +58,67 @@ function switchIcon(description) {
     case "Fog":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/234/original/misty.png?1697163791";
       break;
+  }
+}
+
+function getForecastApi(coordinates) {
+  console.log(coordinates);
+  let apiKey = "46fac47dd8b8fa26d1b6852218ad3dfe";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+}
+
+function showForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  // variable to store forecast HTML
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
+
+  // display daily array
+  let forecast = response.data.daily;
+  // loop through and display each day & HTML block in forecast
+  forecast.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+      <div class="card text-center h-100">
+      <div class="card-body">
+      <h5 class="card-title" id="day">${formatDay(day.dt)}</h5>
+      <p class="card-text weather-icon">
+      <img 
+        id="forecast-icon
+        src="${changeIcon(day.weather[0].main)}" 
+        alt="" 
+        class="weather-icon" 
+      >
+      </p>
+      <p class="card-text">
+      ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
+        day.temp.max
+      )}°</strong></p>
+      </div>
+          </div> 
+          </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+
+  console.log(forecast);
+}
+
+function formatDay(timestamp) {
+  let forecastDay = new Date(timestamp * 1000);
+  console.log(forecastDay);
+  let days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+  return days[forecastDay.getDay()];
+}
+
+function changeIcon(icon) {
+  let iconElement = document.querySelector("#weather-icon");
+  if (iconElement) {
+    iconElement.setAttribute("src", switchIcon(icon));
   }
 }
 
