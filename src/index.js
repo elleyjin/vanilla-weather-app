@@ -1,5 +1,5 @@
 function showWeather(response) {
-  // console.log(response.data);
+  console.log(response.data);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name.toLowerCase();
 
@@ -21,41 +21,54 @@ function showWeather(response) {
   celsiusTemperature = response.data.main.temp;
 
   let iconElement = document.querySelector("#icon");
-  // let icon = response.data.weather[0].icon;
-  // iconElement.setAttribute(
-  //   "src",
-  //   `https://openweathermap.org/img/wn/${icon}@2x.png`
-  // );
+  let icon = response.data.weather[0].icon;
 
-  iconElement.setAttribute("src", switchIcon(response.data.weather[0].main));
+  iconElement.setAttribute("src", switchIcon(icon));
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
   // calling the function with coordinate as parameter
   getForecastApi(response.data.coord);
 }
 
-function switchIcon(description) {
-  switch (description) {
-    case "Clear":
+function switchIcon(icon) {
+  switch (icon) {
+    case "01d":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/097/811/original/sun.png?1695302792";
       break;
-    case "Clouds":
+    case "01n":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/101/029/original/night_%281%29.png?1697547173";
+      break;
+    case "02d":
+    case "04d":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/114/original/few_cloud.png?1697107645";
       break;
-    case "Thunderstorm":
-      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/112/original/thunder.png?1697107627";
+    case "03d":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/113/original/clouds.png?1697107638";
       break;
-    case "Rain":
-    case "Drizzle":
+    case "02n":
+    case "04n":
+    case "03n":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/101/028/original/darkness.png?1697547158";
+    case "09d":
+    case "10d":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/111/original/rainy_%281%29.png?1697107612";
       break;
-    case "Snow":
+    case "09n":
+    case "10n":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/101/031/original/nightrain_%281%29.png?1697547648";
+      break;
+    case "11d":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/112/original/thunder.png?1697107627";
+      break;
+    case "11n":
+      return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/101/030/original/thunder_%281%29.png?1697547183";
+      break;
+    case "13d":
+    case "13n":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/116/original/snow.png?1697108437";
       break;
-    case "Mist":
-    case "Dust":
-    case "Haze":
-    case "Fog":
+    case "50d":
+    case "50n":
       return "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/100/234/original/misty.png?1697163791";
       break;
   }
@@ -76,29 +89,33 @@ function showForecast(response) {
   // display daily array
   let forecast = response.data.daily;
   // loop through and display each day & HTML block in forecast
-  forecast.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
+  forecast.forEach(function (day, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col">
       <div class="card text-center h-100">
       <div class="card-body">
       <h5 class="card-title" id="day">${formatDay(day.dt)}</h5>
       <p class="card-text weather-icon">
       <img 
         id="forecast-icon
-        src="${changeIcon(day.weather[0].main)}" 
-        alt="" 
+        src="https://openweathermap.org/img/wn/${changeIcon(
+          day.weather[0].icon
+        )}@2x.png";
+        alt="${day.weather[0].description}" 
         class="weather-icon" 
       >
       </p>
       <p class="card-text">
       ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
-        day.temp.max
-      )}°</strong></p>
+          day.temp.max
+        )}°</strong></p>
       </div>
           </div> 
           </div>
           `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -109,7 +126,7 @@ function showForecast(response) {
 
 function formatDay(timestamp) {
   let forecastDay = new Date(timestamp * 1000);
-  console.log(forecastDay);
+  // console.log(forecastDay);
   let days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
   return days[forecastDay.getDay()];
@@ -120,6 +137,9 @@ function changeIcon(icon) {
   if (iconElement) {
     iconElement.setAttribute("src", switchIcon(icon));
   }
+
+  console.log(icon);
+  console.log(switchIcon(icon));
 }
 
 function formatDateTime(timestamp) {
