@@ -1,5 +1,4 @@
 function showWeather(response) {
-  console.log(response.data);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name.toLowerCase();
 
@@ -94,27 +93,25 @@ function showForecast(response) {
       forecastHTML =
         forecastHTML +
         `<div class="col">
-      <div class="card text-center h-100">
-      <div class="card-body">
-      <h5 class="card-title" id="day">${formatDay(day.dt)}</h5>
-      <p class="card-text weather-icon">
-      <img 
-        id="forecast-icon
-        src="https://openweathermap.org/img/wn/${changeIcon(
-          day.weather[0].icon
-        )}@2x.png";
-        alt="${day.weather[0].description}" 
-        class="weather-icon" 
-      >
-      </p>
-      <p class="card-text">
-      ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <h5 class="card-title" id="day">${formatDay(day.dt)}</h5>
+              <p class="card-text weather-icon">
+              <img 
+                id="forecast-icon"
+                src="${switchIcon(day.weather[0].icon)}@2x.png";
+                alt="${day.weather[0].description}" 
+                class="weather-icon" 
+              >
+              </p>
+              <p class="card-text">
+              ${Math.floor(day.temp.min)}° | <strong>${Math.floor(
           day.temp.max
         )}°</strong></p>
-      </div>
+              </div>
           </div> 
-          </div>
-          `;
+        </div>
+      `;
     }
   });
 
@@ -126,20 +123,9 @@ function showForecast(response) {
 
 function formatDay(timestamp) {
   let forecastDay = new Date(timestamp * 1000);
-  // console.log(forecastDay);
   let days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
   return days[forecastDay.getDay()];
-}
-
-function changeIcon(icon) {
-  let iconElement = document.querySelector("#forecast-icon");
-  if (iconElement) {
-    iconElement.setAttribute("src", switchIcon(icon));
-  }
-
-  console.log(icon);
-  console.log(switchIcon(icon));
 }
 
 function formatDateTime(timestamp) {
