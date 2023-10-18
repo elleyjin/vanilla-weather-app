@@ -1,10 +1,10 @@
 body {
-  width: 85%;
+  min-width: 85%;
   margin: 0 auto;
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   color: white;
-  background: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+  background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
 }
 
 a {
@@ -17,7 +17,7 @@ a {
 
 footer {
   text-align: center;
-  margin: 20px auto;
+  margin: 25px auto;
   opacity: 0.8;
 }
 
