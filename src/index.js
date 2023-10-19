@@ -84,7 +84,7 @@ function showForecast(response) {
   // variable to store forecast HTML
   let forecastHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">`;
 
-  // display daily array
+  // store daily array
   let forecast = response.data.daily;
   // loop through and display each day & HTML block in forecast
   forecast.forEach(function (day, index) {
