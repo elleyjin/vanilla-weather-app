@@ -205,7 +205,7 @@ function getCurrentPosition(position) {
   console.log(position.coords.longitude);
   console.log(position.coords.latitude);
 
-  axios.get(apiUrl).then(showWeather);
+  axios.get(apiUrl).then(showWeather).then(showCelsiusTemp);
 }
 
 function showCurrentData(position) {
