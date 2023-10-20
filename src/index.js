@@ -204,7 +204,7 @@ function getCurrentPosition(position) {
   axios
     .get(apiUrl)
     .then(showWeather)
-    .then(function () {
+    .then(() => {
       if (farenheitLink.classList.contains("active")) {
         celsiusLink.classList.add("active");
         farenheitLink.classList.remove("active");
