@@ -195,6 +195,23 @@ function showCelsiusTemp(event) {
   showCelsiusTemp.innerHTML = Math.floor(celsiusTemperature);
 }
 
+function getCurrentPosition(position) {
+  let lon = position.coords.longitude;
+  let lat = position.coords.latitude;
+
+  let apiKey = "d0138a4c7d1cd8871d6ba4c962225917";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  console.log(position.coords.longitude);
+  console.log(position.coords.latitude);
+
+  axios.get(apiUrl).then(showWeather);
+}
+
+function showCurrentData(position) {
+  navigator.geolocation.getCurrentPosition(getCurrentPosition);
+}
+
 let months = [
   "Jan",
   "Feb",
@@ -223,5 +240,8 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let changeCity = document.querySelector("#search-input");
 changeCity.addEventListener("change", showCelsiusTemp);
+
+let locationPin = document.querySelector("#location-pin");
+locationPin.addEventListener("click", showCurrentData);
 // Display default city weather information
 searchApi("new york");
