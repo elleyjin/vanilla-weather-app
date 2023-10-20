@@ -176,8 +176,8 @@ function handleSubmit(event) {
 
 function showFarenheitTemp(event) {
   event.preventDefault();
-  let calcFarenheit = document.querySelector("#farenheit-link");
   let temperatureElement = document.querySelector("#temperature");
+  // let calcFarenheit = document.querySelector("#farenheit-link");
 
   farenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
@@ -188,11 +188,10 @@ function showFarenheitTemp(event) {
 
 function showCelsiusTemp(event) {
   event.preventDefault();
-  let showCelsiusTemp = document.querySelector("#temperature");
-
   celsiusLink.classList.add("active");
   farenheitLink.classList.remove("active");
 
+  let showCelsiusTemp = document.querySelector("#temperature");
   showCelsiusTemp.innerHTML = Math.floor(celsiusTemperature);
 }
 
@@ -222,5 +221,7 @@ farenheitLink.addEventListener("click", showFarenheitTemp);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
+let changeCity = document.querySelector("#search-input");
+changeCity.addEventListener("change", showCelsiusTemp);
 // Display default city weather information
 searchApi("new york");
